@@ -1,0 +1,20 @@
+meta {
+  name: Create User
+  type: http
+  seq: 6
+}
+
+post {
+  url: https://api.dripdropco.com/users
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+      "username": "esamkriegel",
+      "email": "esamkriegel@gmail.com",
+      "password": "@testPassword123!",
+      "dob": "2000-12-12"
+  }
+}

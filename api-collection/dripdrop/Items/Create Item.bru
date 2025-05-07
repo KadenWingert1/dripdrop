@@ -1,0 +1,43 @@
+meta {
+  name: Create Item
+  type: http
+  seq: 4
+}
+
+post {
+  url: https://api.dripdropco.com/items
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: 
+}
+
+body:json {
+  {
+    "image_id": "13",
+    "xCoord": 150,
+    "yCoord": 300,
+    "name": "Nike Air Force 1",
+    "brand": "Nike",
+    "category": "Shoes",
+    "price": 109.99,
+    "itemURL": "https://example.com/nike-af1",
+    "size": "10"
+  }
+  
+}
+
+script:pre-request {
+  const token = bru.getVar("id_token");  // Use bru.getVar() instead of bru.getEnvVar()
+  const tokenExpiresAt = parseInt(bru.getVar("token_expires_at"), 10);  // Use bru.getVar() here too
+  const now = Math.floor(Date.now() / 1000);
+  
+  if (!token || now >= tokenExpiresAt) {
+    throw new Error("Token expired or missing. Please run the 'Get Token' request manually.");
+  } else {
+    req.setHeader("Authorization", `Bearer ${token}`);
+  }
+  
+}

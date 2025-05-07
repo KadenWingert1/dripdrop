@@ -1,0 +1,10 @@
+torch
+torchvision
+opencv-python
+webcolors
+scikit-learn
+pandas
+requests
+ultralytics 
+pillow
+matplotlib
